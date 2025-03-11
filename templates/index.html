@@ -3,47 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Prediction Dashboard</title>
+    <title>Stock Price Prediction</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
             padding: 20px;
-            background: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
-        .predicted-price {
-            font-size: 24px;
-            color: #27ae60;
-            font-weight: bold;
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .graph-container {
+
+        #graph {
+            width: 90%;
+            max-width: 1200px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #2c3e50;
             margin-top: 20px;
+            text-align: center;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
+    <h1>Apple Stock Price Prediction</h1>
+    <div id="graph"></div>
 
-    <div class="container">
-        <h1>📈 Apple Stock Price Prediction</h1>
-        <p>Predicted Closing Price: <span class="predicted-price">{{ predicted_price }}</span></p>
-        
-        <div class="graph-container">
-            {{ graph_html|safe }}
-        </div>
-    </div>
-
+    <script>
+        var graphJSON = {{ graph_json | safe }};
+        Plotly.newPlot("graph", graphJSON.data, graphJSON.layout);
+    </script>
+     
 </body>
 </html>
